@@ -1,29 +1,88 @@
 import 'package:flutter/material.dart';
 
-Widget criteriaTile(String spendPrice, String goal) {
+Widget criteriaTile(String trackingStr, String spendTitle, String goal) {
   return Container(
-    padding: EdgeInsets.all(12),
+    padding: const EdgeInsets.all(12),
     height: 100,
-    margin: EdgeInsets.all(15),
+    margin: const EdgeInsets.symmetric(
+      horizontal: 10,
+      vertical: 2,
+    ),
     decoration: BoxDecoration(
-      color: Color(0xFF282c3f),
+      color: const Color(0xFF282c3f),
       borderRadius: BorderRadius.circular(6),
     ),
     child: Row(
       children: [
         Image.asset(
-          'assets/insiders/af3827a0-d814-4adf-9c64-875056c24b571623268092599-Slice-8-3x--1---1-__1_-removebg-preview.png',
-          height: 50,
-          width: 50,
+          'assets/insiders/icon.png',
+          fit: BoxFit.cover,
+          height: 60,
+          width: 60,
         ),
-        Center(
-            child: Text(
-          '₹ ${spendPrice}',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 19,
+        const SizedBox(
+          width: 8,
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 38,
+              width: 170,
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Text(
+                  trackingStr,
+                  style: const TextStyle(
+                    fontSize: 28,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              height: 38,
+              width: 170,
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Text(
+                  spendTitle,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Color(0xFF9fa1a7),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(
+          width: 8,
+        ),
+        Container(
+          height: 80,
+          width: 92,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                goal,
+                style: const TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                ),
+              ),
+              const Text(
+                'Goal',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
+              ),
+            ],
           ),
-        )),
+        ),
       ],
     ),
   );
