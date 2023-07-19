@@ -11,9 +11,9 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  List<Widget> _screens = [
-    HomeScreen(),
-    InsidersProgram(),
+  final List<Widget> _screens = [
+    const HomeScreen(),
+    const InsidersProgram(),
   ];
 
   int currentScreenIdx = 0;
@@ -28,7 +28,7 @@ class _MainScreenState extends State<MainScreen> {
             onPressed: () {
               Scaffold.of(context).openDrawer();
             },
-            icon: Icon(Icons.menu),
+            icon: const Icon(Icons.menu),
             color: Colors.black,
           );
         }),
@@ -85,7 +85,7 @@ class _MainScreenState extends State<MainScreen> {
                 },
                 child: drawerTile(Icons.home, 'Homepage'),
               ),
-              Divider(
+              const Divider(
                 color: Colors.black,
               ),
               GestureDetector(
@@ -99,7 +99,7 @@ class _MainScreenState extends State<MainScreen> {
                 child:
                     drawerTile(Icons.supervised_user_circle_sharp, 'Insiders'),
               ),
-              Divider(
+              const Divider(
                 color: Colors.black,
               ),
             ],

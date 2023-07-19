@@ -3,34 +3,37 @@ import 'package:myntra_clone_ui/model/product_model.dart';
 
 Widget productItemTile(ProductModel item) {
   return Container(
-    margin: EdgeInsets.only(right: 1),
+    margin: const EdgeInsets.only(right: 1),
     height: 300,
     color: Colors.white,
     child: Column(
       children: [
         Align(
           alignment: Alignment.topLeft,
-          child: Container(
+          child: SizedBox(
             height: 200,
             width: 200,
-            color: Colors.deepPurple,
+            child: Image.network(
+              item.imageId,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
         Container(
-          padding: EdgeInsets.only(left: 5, top: 10),
+          padding: const EdgeInsets.only(left: 5, top: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 item.productName,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 19,
                 ),
               ),
               Text(
                 item.category,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w300,
                   color: Colors.grey,
@@ -40,12 +43,12 @@ Widget productItemTile(ProductModel item) {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text('₹${item.currentPrice}'),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Text(
                     '₹${item.previousPrice}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w300,
                       color: Colors.grey,
@@ -54,12 +57,12 @@ Widget productItemTile(ProductModel item) {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Text(
                 '${item.offervalue}%',
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.red,
                 ),
               )

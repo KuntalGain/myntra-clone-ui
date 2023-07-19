@@ -1,4 +1,5 @@
 class ProductModel {
+  final String imageId;
   final String productName;
   final String category;
   final double currentPrice;
@@ -6,6 +7,7 @@ class ProductModel {
   final int offervalue;
 
   ProductModel(
+    this.imageId,
     this.productName,
     this.category,
     this.currentPrice,

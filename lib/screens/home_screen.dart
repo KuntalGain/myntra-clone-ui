@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:myntra_clone_ui/data/product_data.dart';
 import 'package:myntra_clone_ui/model/product_model.dart';
+import 'package:myntra_clone_ui/model/user_model.dart';
 import 'package:myntra_clone_ui/widgets/favourite_tile.dart';
 import 'package:myntra_clone_ui/widgets/product_item_tile.dart';
 
@@ -14,21 +15,41 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIdx = 0;
-  final List<Color> carouselColors = [
-    Colors.red,
-    Colors.orange,
-    Colors.yellow,
-    Colors.green,
-    Colors.blue,
-    Colors.pink,
-    Colors.purple,
+
+  // List of Promotional Ads
+  final List<String> carouselItems = [
+    'assets/home_icons/ad-2.jpg',
+    'assets/home_icons/ad-3.jpg',
+    'assets/home_icons/ad-4.jpg',
+    'assets/home_icons/ad-5.jpg',
+    'assets/home_icons/ad-6.jpg',
+    'assets/home_icons/ad-7.jpg',
+    'assets/home_icons/ad-8.jpg',
   ];
 
+  // List of Featured Items
+  final List<String> featuredItems = [
+    'assets/home_icons/f-1.jpg',
+    'assets/home_icons/f-2.jpg',
+    'assets/home_icons/f-3.jpg',
+  ];
+
+  // List of Category by Type of Users
+  List<UserModel> userCategory = [
+    UserModel(imageId: 'assets/home_icons/cat-1.png', userType: 'MEN'),
+    UserModel(imageId: 'assets/home_icons/cat-2.png', userType: 'WOMEN'),
+    UserModel(imageId: 'assets/home_icons/cat-3.png', userType: 'KIDS'),
+    UserModel(imageId: 'assets/home_icons/cat-4.png', userType: 'FOOTWEAR'),
+    UserModel(imageId: 'assets/home_icons/cat-5.png', userType: 'COSMETICS'),
+    UserModel(imageId: 'assets/home_icons/cat-6.png', userType: 'ACCESSORIES'),
+  ];
+
+  // List of Categories
   List<String> category = [
     'All',
     'Kurta Sets',
     'Shirts',
-    'Heels',
+    'Casual Shoes',
     'Flip Flops',
     'Dresses',
     'Trousers'
@@ -36,15 +57,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int selectedIdx = 0;
 
+  // Method for Keep Track of Ads Number
   Widget _buildTrackingBubbles() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: carouselColors.map((color) {
-        int index = carouselColors.indexOf(color);
+      children: carouselItems.map((color) {
+        int index = carouselItems.indexOf(color);
         return Container(
           width: 10.0,
           height: 10.0,
-          margin: EdgeInsets.symmetric(horizontal: 4.0),
+          margin: const EdgeInsets.symmetric(horizontal: 4.0),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: _currentIdx == index ? Colors.blue : Colors.grey,
@@ -56,60 +78,67 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    bool isPressed = false;
+    // Filter out Products by Defined Category
+    List<ProductModel> filteredItems = allItems.where((item) {
+      return category[selectedIdx] == 'All' ||
+          item.category == category[selectedIdx];
+    }).toList();
 
-    List<String> items = [
-      'Hello World',
-      'Namaste World',
-      'Namaste Duniya',
-    ];
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
             // categories List
-            Container(
+            SizedBox(
               height: 120,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: 11,
+                itemCount: userCategory.length,
                 itemBuilder: (ctx, idx) {
                   return Column(
                     children: [
                       Container(
-                        margin: EdgeInsets.all(5),
+                        margin: const EdgeInsets.all(5),
                         height: 80,
                         width: 80,
                         decoration: BoxDecoration(
-                          color: Colors.deepPurple,
-                          shape: BoxShape.circle,
+                          borderRadius: BorderRadius.circular(50),
+                          image: DecorationImage(
+                            image: AssetImage(userCategory[idx].imageId),
+                          ),
                         ),
                       ),
-                      Text('data'),
+                      Text(
+                        userCategory[idx].userType,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ],
                   );
                 },
               ),
             ),
-            // Promotional Advertisement
+
+            // In-App Promotional Ad
 
             Container(
               height: 170,
-              decoration: BoxDecoration(
-                color: Colors.deepPurple,
-              ),
+              decoration: const BoxDecoration(),
+              child: Image.asset('assets/home_icons/ad-1.jpg'),
             ),
 
-            // Signup for exiciting deals
+            // Button to signup/Login
 
             Container(
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               height: 40,
               decoration: BoxDecoration(
                 color: Colors.black,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
                   'Signup for Exciting Deals!',
                   style: TextStyle(
@@ -122,12 +151,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // carosaul advertisement
 
-            Container(
+            SizedBox(
               height: 180,
               child: CarouselSlider(
                 options: CarouselOptions(
                   autoPlay: true,
-                  autoPlayInterval: Duration(seconds: 3),
+                  autoPlayInterval: const Duration(seconds: 3),
                   height: 180,
                   enableInfiniteScroll: false,
                   viewportFraction: 1.0,
@@ -137,25 +166,29 @@ class _HomeScreenState extends State<HomeScreen> {
                     });
                   },
                 ),
-                items: carouselColors.map((color) {
-                  return Container(
+                items: carouselItems.map((image) {
+                  return SizedBox(
                     width: double.infinity,
-                    color: color,
+                    child: Image.asset(
+                      image,
+                      fit: BoxFit.contain,
+                    ),
                   );
                 }).toList(),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             _buildTrackingBubbles(),
+
             // offers - 100% original,Free shipping,Easy returns
 
             Row(
               children: [
                 Expanded(
                   child: Container(
-                    margin: EdgeInsets.all(5),
+                    margin: const EdgeInsets.all(5),
                     height: 45,
                     decoration: BoxDecoration(
                       color: Colors.teal.shade600,
@@ -170,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           width: 25,
                           color: Colors.white,
                         ),
-                        Text(
+                        const Text(
                           '100% Original\n Products',
                           style: TextStyle(
                             color: Colors.white,
@@ -183,7 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Expanded(
                   child: Container(
-                    margin: EdgeInsets.all(5),
+                    margin: const EdgeInsets.all(5),
                     height: 45,
                     decoration: BoxDecoration(
                       color: Colors.teal.shade600,
@@ -198,7 +231,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           width: 25,
                           color: Colors.white,
                         ),
-                        Text(
+                        const Text(
                           'Free Shipping\nOn 1st Order',
                           style: TextStyle(
                             color: Colors.white,
@@ -211,7 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Expanded(
                   child: Container(
-                    margin: EdgeInsets.all(5),
+                    margin: const EdgeInsets.all(5),
                     height: 45,
                     decoration: BoxDecoration(
                       color: Colors.teal.shade600,
@@ -226,7 +259,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           width: 25,
                           color: Colors.white,
                         ),
-                        Text(
+                        const Text(
                           'Easy Returns \n& Refunds',
                           style: TextStyle(
                             color: Colors.white,
@@ -239,9 +272,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
+
             // Featured selection
 
-            Container(
+            SizedBox(
               height: 150,
               width: double.infinity,
               child: ListView.builder(
@@ -249,18 +283,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: 3,
                   itemBuilder: (ctx, idx) {
                     return Container(
-                      margin: EdgeInsets.all(5),
+                      margin: const EdgeInsets.all(5),
                       height: 150,
                       width: 120,
-                      color: Colors.deepPurple,
+                      child: Image.asset(featuredItems[idx]),
                     );
                   }),
             ),
 
             // All Time Favourite section
+
             Container(
-              margin: EdgeInsets.all(10),
-              child: Text(
+              margin: const EdgeInsets.all(10),
+              child: const Text(
                 'ALL-TIME FAVOURITES',
                 style: TextStyle(
                   fontSize: 29,
@@ -269,41 +304,59 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
+            // List of price categories
+
             Row(
               children: [
-                Expanded(child: allTimeFavouriteTile("Image Id", 'Under ₹400')),
-                Expanded(child: allTimeFavouriteTile("Image Id", 'Under ₹400')),
+                Expanded(
+                    child: allTimeFavouriteTile(
+                        "assets/home_icons/c-1.jpg", 'Under ₹400')),
+                Expanded(
+                    child: allTimeFavouriteTile(
+                        "assets/home_icons/c-2.jpg", 'Under ₹400')),
               ],
             ),
             Row(
               children: [
-                Expanded(child: allTimeFavouriteTile("Image Id", 'Under ₹400')),
-                Expanded(child: allTimeFavouriteTile("Image Id", 'Under ₹400')),
+                Expanded(
+                    child: allTimeFavouriteTile(
+                        "assets/home_icons/c-3.jpg", 'Under ₹400')),
+                Expanded(
+                    child: allTimeFavouriteTile(
+                        "assets/home_icons/c-4.jpg", 'Under ₹400')),
               ],
             ),
             Row(
               children: [
-                Expanded(child: allTimeFavouriteTile("Image Id", 'Under ₹400')),
-                Expanded(child: allTimeFavouriteTile("Image Id", 'Under ₹400')),
+                Expanded(
+                    child: allTimeFavouriteTile(
+                        "assets/home_icons/c-5.jpg", 'Under ₹400')),
+                Expanded(
+                    child: allTimeFavouriteTile(
+                        "assets/home_icons/c-6.jpg", 'Under ₹400')),
               ],
             ),
             Row(
               children: [
-                Expanded(child: allTimeFavouriteTile("Image Id", 'Under ₹400')),
-                Expanded(child: allTimeFavouriteTile("Image Id", 'Under ₹400')),
+                Expanded(
+                    child: allTimeFavouriteTile(
+                        "assets/home_icons/c-7.jpg", 'Under ₹400')),
+                Expanded(
+                    child: allTimeFavouriteTile(
+                        "assets/home_icons/c-8.jpg", 'Under ₹400')),
               ],
             ),
 
             // view all button
 
             Container(
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               height: 30,
               decoration: BoxDecoration(
                 color: Colors.black,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
                   'View All',
                   style: TextStyle(
@@ -314,9 +367,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
-            // Listview horizontal
+            // Product Lists
 
-            Container(
+            // categories Selection
+
+            SizedBox(
                 height: 35,
                 child: ListView.builder(
                     scrollDirection: Axis.horizontal,
@@ -329,10 +384,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           });
                         },
                         child: Container(
-                          margin: EdgeInsets.all(2),
+                          margin: const EdgeInsets.all(2),
                           height: 20,
-                          padding:
-                              EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 5, horizontal: 15),
                           decoration: BoxDecoration(
                             border: Border.all(
                               color: (selectedIdx == idx)
@@ -356,20 +411,21 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       );
                     })),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
-            // dress categories
-            Container(
-              height: 600,
+
+            // Product Lists
+            SizedBox(
+              height: (filteredItems.length / 2) * 380,
               child: ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: (items.length / 2).ceil(),
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: (filteredItems.length / 2).ceil(),
                 itemBuilder: (BuildContext context, int index) {
-                  List<ProductModel> filteredItems = allItems.where((item) {
-                    return category[selectedIdx] == 'All' ||
-                        item.category == category[selectedIdx];
-                  }).toList();
+                  // List<ProductModel> filteredItems = allItems.where((item) {
+                  //   return category[selectedIdx] == 'All' ||
+                  //       item.category == category[selectedIdx];
+                  // }).toList();
 
                   int firstIndex = index * 2;
                   int secondIndex = firstIndex + 1;
@@ -392,12 +448,32 @@ class _HomeScreenState extends State<HomeScreen> {
                       return productItemTile(filteredItems[firstIndex]);
                     }
                   } else {
-                    return SizedBox.shrink(); // Empty widget if no more items
+                    return const SizedBox
+                        .shrink(); // Empty widget if no more items
                   }
                 },
               ),
-            )
+            ),
+
             // view more button
+
+            Container(
+              height: 60,
+              width: double.infinity,
+              margin: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.black87,
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: const Center(
+                child: Text(
+                  'View More Products',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

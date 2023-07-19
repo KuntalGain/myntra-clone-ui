@@ -26,7 +26,7 @@ Widget criteriaTile(String trackingStr, String spendTitle, String goal) {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
               height: 38,
               width: 170,
               child: Padding(
@@ -40,7 +40,7 @@ Widget criteriaTile(String trackingStr, String spendTitle, String goal) {
                 ),
               ),
             ),
-            Container(
+            SizedBox(
               height: 38,
               width: 170,
               child: Padding(
@@ -59,7 +59,7 @@ Widget criteriaTile(String trackingStr, String spendTitle, String goal) {
         const SizedBox(
           width: 8,
         ),
-        Container(
+        SizedBox(
           height: 80,
           width: 92,
           child: Column(

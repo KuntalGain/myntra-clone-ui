@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 Widget allTimeFavouriteTile(String title, String offer) {
   return Container(
-    margin: EdgeInsets.all(5),
+    margin: const EdgeInsets.all(5),
     height: 160,
     width: 100,
-    decoration: BoxDecoration(color: Colors.white, boxShadow: [
+    decoration: const BoxDecoration(color: Colors.white, boxShadow: [
       BoxShadow(
         color: Colors.grey,
         offset: Offset(0, 1),
@@ -14,14 +14,14 @@ Widget allTimeFavouriteTile(String title, String offer) {
     ]),
     child: Column(
       children: [
-        Container(
+        SizedBox(
           height: 120,
-          color: Colors.deepPurple,
+          child: Image.asset(title),
         ),
         Center(
           child: Text(
             offer,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.bold,
             ),

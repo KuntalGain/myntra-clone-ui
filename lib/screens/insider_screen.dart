@@ -201,7 +201,7 @@ class InsidersProgram extends StatelessWidget {
               ),
             ),
             Center(
-              child: Container(
+              child: SizedBox(
                 height: 50,
                 width: 132,
                 // color: Colors.deepPurple,
@@ -212,7 +212,7 @@ class InsidersProgram extends StatelessWidget {
                       fit: BoxFit.cover,
                       height: 22,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 2,
                     ),
                     Image.asset(
@@ -225,7 +225,7 @@ class InsidersProgram extends StatelessWidget {
                 ),
               ),
             ),
-            Center(
+            const Center(
               child: Text(
                 'Fashion Advice | VIP Access | Extra Savings',
                 style: TextStyle(
@@ -233,7 +233,7 @@ class InsidersProgram extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
           ],
@@ -241,11 +241,11 @@ class InsidersProgram extends StatelessWidget {
       ),
       bottomNavigationBar: Container(
         height: 120,
-        color: Color(0xff282c3f),
+        color: const Color(0xff282c3f),
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                 top: 10,
                 left: 15,
                 right: 15,
@@ -253,10 +253,10 @@ class InsidersProgram extends StatelessWidget {
               height: 50,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Color(0xffff3f6c),
+                color: const Color(0xffff3f6c),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
                   'LOG IN',
                   style: TextStyle(
@@ -266,8 +266,8 @@ class InsidersProgram extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0),
+            const Padding(
+              padding: EdgeInsets.only(top: 10.0),
               child: Text(
                 'By enrolling you agree to',
                 style: TextStyle(
@@ -275,7 +275,7 @@ class InsidersProgram extends StatelessWidget {
                 ),
               ),
             ),
-            Text(
+            const Text(
               'Insider Terms & Conditions',
               style: TextStyle(
                 color: Color(0xffff3f6c),

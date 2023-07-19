@@ -1,7 +1,60 @@
 import 'package:myntra_clone_ui/model/product_model.dart';
 
 List<ProductModel> allItems = [
-  ProductModel('Khusal K', 'Kurta Sets', 1634, 5449, 70),
-  ProductModel('Singni', 'Kurta Sets', 1149, 4999, 77),
-  ProductModel('Puma', 'Flip Flops', 1599, 1999, 20),
+  ProductModel(
+    'https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/20695836/2022/11/10/ba1724c2-c606-481c-a0ca-63424b61a8661668078028270WomensRayonPrintedEmbroideredKurtaWithPantAndDupatta1.jpg',
+    'Singni',
+    'Kurta Sets',
+    1149,
+    4999,
+    77,
+  ),
+  ProductModel(
+    'https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/22120556/2023/2/25/986d6f97-fe9b-487a-9c64-f577e0a32c491677314970316KhushalKwomenEmbroideryKurtaandpalazzowithdupattaset7.jpg',
+    'Khusal K',
+    'Kurta Sets',
+    1634,
+    5499,
+    70,
+  ),
+  ProductModel(
+    'https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/10938976/2020/2/14/a29130ea-bede-491e-a02c-b3f092f61a811581660078861-Roadster-Men-Tshirts-1321581660077099-1.jpg',
+    'Roadster',
+    'Shirts',
+    343,
+    799,
+    57,
+  ),
+  ProductModel(
+    'https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/18652620/2022/8/26/4d5f7043-a460-42e5-b67a-b04d9c0bc7041661503606623-KALINI-Women-Beige-Floral-Yoke-Design-Kurta-with-Trousers--W-1.jpg',
+    'Kalini',
+    'Kurta Sets',
+    887,
+    3699,
+    76,
+  ),
+  ProductModel(
+    'https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/23612812/2023/6/13/9fb0b770-b663-4ee5-b48a-36dfd9ece1491686640151983AllenSollyWomanWomenBlackTypographyT-shirt1.jpg',
+    'Allen Solly Woman',
+    'Shirts',
+    1156,
+    1299,
+    11,
+  ),
+  ProductModel(
+    'https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/20982442/2022/11/29/d4c004ad-d941-447e-9f3a-e496ea748d381669728094821CasualShoes1.jpg',
+    'Kook N Keech',
+    'Casual Shoes',
+    674,
+    2699,
+    75,
+  ),
+  ProductModel(
+    'https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/17079210/2022/3/15/b806eba8-f26c-48fa-ada7-2e84acf574171647339884214-ELLE-Black-Solid-Block-Pumps-1421647339883923-1.jpg',
+    'ELLE',
+    'Casual Shoes',
+    1319,
+    2399,
+    45,
+  ),
 ];
